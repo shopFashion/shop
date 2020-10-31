@@ -40,7 +40,7 @@ class LoginPage extends React.Component {
 
     const { history } = this.props;
 
-    const fields = ["username", "password"];
+    const fields = ["email", "password"];
     const formElements = e.target.elements;
 
     const formValues = fields
@@ -50,27 +50,28 @@ class LoginPage extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
 
     let loginRequest;
-    try {
+    
       loginRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/login`,
+        `http://localhost:3030/users/api/login`,
         {
           ...formValues
         },
-        {
-          withCredentials: true
-        }
-      );
-    } catch ({ response }) {
-      loginRequest = response;
-    }
-    const { data: loginRequestData } = loginRequest;
-    if (loginRequestData.success) {
-      return history.push("/dashboard");
-    }
+        // {
+        //   withCredentials: true
+        // }
+      ).then((data)=>{
+        // NotificationManager.success('You have added a new book!', 'Successful!', 2000);
+        history.push("/")
+      })
+   
+    // const { data: loginRequestData } = loginRequest;
+    // if (loginRequestData.success) {
+    //   return history.push("/");
+    // }
 
-    this.setState({
-      errors: loginRequestData.messages && loginRequestData.messages.errors
-    });
+    // this.setState({
+    //   errors: loginRequestData.messages && loginRequestData.messages.errors
+    // });
   };
   handleToggle = value => {
     const { checked } = this.state;
@@ -83,9 +84,9 @@ class LoginPage extends React.Component {
       newChecked.splice(currentIndex, 1);
     }
 
-    this.setState({
-      checked: newChecked
-    });
+    // this.setState({
+    //   checked: newChecked
+    // });
   };
   render() {
     const { classes } = this.props;
@@ -145,7 +146,7 @@ class LoginPage extends React.Component {
                     }}
                     inputProps={{
                       required: true,
-                      name: "username",
+                      name: "email",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />

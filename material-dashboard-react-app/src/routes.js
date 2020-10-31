@@ -12,7 +12,7 @@ import Login from "@material-ui/icons/LockOpen";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.jsx";
 import UserProfile from "views/UserProfile/UserProfile.jsx";
-import TableList from "views/TableList/TableList.jsx";
+import TableList from "./views/Pages/UserList";
 import Typography from "views/Typography/Typography.jsx";
 import Icons from "views/Icons/Icons.jsx";
 import Maps from "views/Maps/Maps.jsx";
@@ -44,7 +44,7 @@ const dashboardRoutes = [
   },
   {
     path: "/table",
-    name: "Table List",
+    name: "User List",
     rtlName: "قائمة الجدول",
     icon: "content_paste",
     component: TableList,

@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Alert from '@material-ui/lab/Alert';
+
+
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -41,7 +45,7 @@ class RegisterPage extends React.Component {
 
     const { history } = this.props;
 
-    const fields = ["name", "username", "password"];
+    const fields = ["email", "username", "password"];
     const formElements = e.target.elements;
 
     const formValues = fields
@@ -51,26 +55,31 @@ class RegisterPage extends React.Component {
       .reduce((current, next) => ({ ...current, ...next }));
 
     let registerRequest;
-    try {
+    
       registerRequest = await axios.post(
-        `http://${REACT_APP_SERVER_URL}/register`,
+        `http://localhost:3030/users/api/register`,
         {
           ...formValues
         }
-      );
-    } catch ({ response }) {
-      registerRequest = response;
-    }
-    const { data: registerRequestData } = registerRequest;
-    if (registerRequestData.success) {
-      return history.push("/login");
-    }
+      ).then((data)=>{
+        // NotificationManager.success('You have added a new book!', 'Successful!', 2000);
+        
+        history.push("/auth/login-page")
+      })
+    // } catch ({ response }) {
+    //   registerRequest = response;
+    // }
+    // const { data: registerRequestData } = registerRequest;
+    // if (registerRequestData.success) {
+    //   return history.push("/login");
+    // }
 
-    this.setState({
-      errors:
-        registerRequestData.messages && registerRequestData.messages.errors
-    });
+    // this.setState({
+    //   errors:
+    //     registerRequestData.messages && registerRequestData.messages.errors
+    // });
   };
+  
   handleToggle = value => {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(value);
@@ -90,15 +99,18 @@ class RegisterPage extends React.Component {
     const { classes } = this.props;
     const { errors } = this.state;
     return (
+      
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
+          
             <form onSubmit={this.register}>
               <Card className={classes[this.state.cardAnimaton]}>
                 <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="primary"
                 >
+                   
                   <h4 className={classes.cardTitle}>Register</h4>
                   <div className={classes.socialLine}>
                     {[
@@ -123,14 +135,14 @@ class RegisterPage extends React.Component {
                   <p className={classes.cardDescription}>Or Be Classical</p>
                   <CustomInput
                     labelText="Name..."
-                    id="name"
+                    id="username"
                     formControlProps={{
                       fullWidth: true,
                       className: classes.formControlClassName
                     }}
                     inputProps={{
                       required: true,
-                      name: "name",
+                      name: "username",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Face className={classes.inputAdornmentIcon} />
@@ -149,7 +161,7 @@ class RegisterPage extends React.Component {
                     inputProps={{
                       required: true,
                       type: "email",
-                      name: "username",
+                      name: "email",
                       endAdornment: (
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />
