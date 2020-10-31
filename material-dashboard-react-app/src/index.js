@@ -12,6 +12,7 @@ import Home from "Home/layouts/Home.js"
 import RTL from "layouts/RTL.jsx";
 
 import "assets/css/material-dashboard-react.css?v=1.6.0";
+import Login from "./Home/layouts/Login";
 
 const hist = createBrowserHistory();
 
@@ -27,7 +28,7 @@ ReactDOM.render(
       {/* <Redirect from="/" to="/admin/dashboard" /> */}
       <Redirect from="/manager" to="/auth/login-page" />
 
-      <Redirect from="/" to="/Home" />
+      <Redirect from="/" to="/home" />
     </Switch>
   </Router>,
   document.getElementById("root")

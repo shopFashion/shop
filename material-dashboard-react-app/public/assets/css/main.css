@@ -8,11 +8,12 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background:;
   position: relative;
   font-weight:400px;
 }
-
+.clr-white {
+  background-color: white;
+}
 ul li {
   list-style: none;
 }
@@ -633,7 +634,6 @@ ul.sub-menu {
   margin-top: 23px;
 }
 
-
 .item button:hover {
   background: #FE980F;
 }
@@ -899,7 +899,7 @@ h2.title {
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
+  opacity:0;
 }
 
 .single-products:hover .product-overlay {
@@ -1062,9 +1062,6 @@ h2.title {
 
 .recommended-item-control i:hover {
   background: #ccccc6;
-}
-
-.recommended_items  h2 {
 }
 
 .our_partners{
