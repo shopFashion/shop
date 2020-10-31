@@ -10,11 +10,13 @@ import { Provider } from 'react-redux';
 // core components
 import Admin from "layouts/Admin.jsx";
 import Auth from "layouts/Auth.jsx";
+import Home from "Home/layouts/Home.js"
 import RTL from "layouts/RTL.jsx";
 import axios from "axios";
 import store from "./store"
 
 import "assets/css/material-dashboard-react.css?v=1.6.0";
+import Login from "./Home/layouts/Login";
 
 const hist = createBrowserHistory();
 axios.defaults.baseURL = process.env.URL || "http://localhost:3030";
@@ -27,10 +29,13 @@ ReactDOM.render(
       <Route extends path="/admin" component={Admin} />
       {/* <Route path="/admin" component={LoginPage} /> */}
       {/* <Redirect from="/admin" to="admin/dashboard" /> */}
-
+      <Route path= "/home" component={Home} />
       <Route path="/auth" component={Auth} />
       {/* <Route path="/rtl" component={RTL} /> */}
-      <Redirect from="/" to="/admin/dashboard" />
+      {/* <Redirect from="/" to="/admin/dashboard" /> */}
+      <Redirect from="/manager" to="/auth/login-page" />
+
+      <Redirect from="/" to="/home" />
     </Switch>
   </Router>
   </Provider>
